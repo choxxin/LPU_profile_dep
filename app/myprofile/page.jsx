@@ -11,10 +11,7 @@ import Subjectt from "@/components/graph/Subattendence";
 import { LuGithub } from "react-icons/lu";
 import useAuthRedirect from "@/utils/useAuthredirect";
 
-import {
-  getProfileByRegistrationNumber,
-  updateUserAvatar,
-} from "@/app/api/umsinfo";
+import { updateUserAvatar } from "@/app/api/umsinfo";
 import Leetcode from "../../components/leetcode";
 import { useRouter } from "next/navigation";
 import NOLeetcode from "../../components/noleetcode";
@@ -105,7 +102,16 @@ const MyProfile = () => {
   const fetchProfileData = async () => {
     try {
       setLoading(true);
-      const data = await getProfileByRegistrationNumber(registrationNumber);
+      const response = await fetch("/api/getprofilebyregno", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reg_no: registrationNumber }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile");
+      }
+      const data = await response.json();
       setProfileData(data);
       SetColor(data.user.themetop);
       sethide(data.user.hide);
@@ -158,28 +164,6 @@ const MyProfile = () => {
     }
   };
 
-  //For fetching leetcode api
-  // useEffect(() => {
-  //   // Fetch the user data on mount
-  //   const fetchUser = async () => {
-  //     try {
-  //       if (profileData.leetcode_username) {
-  //         const Leetdata = await handleleetcodeprofile(
-  //           profileData.leetcode_profile
-  //         );
-  //         setLeetcodeProfile(Leetdata);
-  //         setleetcodeusername(profileData.leetcode_username);
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching user data:", err);
-  //       setError("Failed to fetch user data.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
   const handleProfileSaved = () => {
     fetchProfileData(); // Refresh profile data
   };
