@@ -29,7 +29,7 @@ export default function HorizontalBars() {
     };
     setLoading(true);
 
-    fetch("http://localhost:8000/api/v1/timetable/today", {
+    fetch("https://ums-api-5lof.onrender.com/api/v1/timetable/today", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

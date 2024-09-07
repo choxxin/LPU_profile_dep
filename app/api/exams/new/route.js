@@ -24,7 +24,7 @@ export async function POST(req) {
     if (isDataOldOrAbsent) {
       // Step 3: Fetch updated exams from the external API
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/exams",
+        "https://ums-api-5lof.onrender.com/api/v1/user/exams",
         {
           reg_no,
           password,

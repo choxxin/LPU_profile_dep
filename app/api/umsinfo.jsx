@@ -7,7 +7,7 @@ import Profile from "@/models/profile";
 import Subject from "@/models/subjects";
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_UMS_API_BASE_URL ||
-  " http://localhost:8000/api/v1/user";
+  "https://ums-api-5lof.onrender.com";
 
 const SECRET_KEY = process.env.JWT_SECRET;
 export const loginUser = async (reg_no, password, avatar) => {
@@ -294,7 +294,7 @@ export const Update_course_detail = async (
   try {
     // Fetch course data from the API
     const response = await axios.post(
-      "http://localhost:8000/api/v1/timetable/classes",
+      "https://ums-api-5lof.onrender.com/api/v1/timetable/classes",
       {
         reg_no: registrationNumber,
         password,
