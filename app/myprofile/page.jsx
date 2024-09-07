@@ -85,7 +85,17 @@ const MyProfile = () => {
 
   const changeavatar = async () => {
     try {
-      await updateUserAvatar(registrationNumber, Inputs.avatar);
+      await fetch("/api/updateAvatar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reg_no: registrationNumber, // The registration number of the user
+          avatar: Inputs.avatar, // The new avatar URL or image
+        }),
+      });
+
       setdp(Inputs.avatar);
       toast.success("Avatar updated successfully");
       router.push("/");
