@@ -4,11 +4,11 @@ import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 
 import CourseList from "./courseList";
-import { getProfileByRegistrationNumber } from "@/app/api/umsinfo";
+
 import Leetcode from "./leetcode";
 import NOLeetcode from "./noleetcode";
 import { LuGithub } from "react-icons/lu";
-import { handleleetcodeprofile, GetCourses } from "@/app/api/umsinfo";
+import { handleleetcodeprofile } from "@/app/api/umsinfo";
 
 import toast from "react-hot-toast";
 import useUserStore from "@/store/useUserStore";
@@ -28,13 +28,30 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
   const fetchProfileData = async () => {
     try {
       setLoading(true);
-      const data = await getProfileByRegistrationNumber(registrationNumber);
+      // const data = await getProfileByRegistrationNumber(registrationNumber);
+      const response = await fetch("/api/getprofilebyregno", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reg_no: registrationNumber }),
+      });
 
-      const courses = await GetCourses(registrationNumber);
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile");
+      }
+      const data = await response.json();
+
+      // const courses = await GetCourses(registrationNumber);
+      const response2 = await fetch("/api/getcourse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reg_no: registrationNumber }),
+      });
+
+      const courses = await response2.json();
       setcourse(courses);
 
       setProfileData(data);
-      sethide(data.user.hide);
+      sethide(data.user?.hide);
       console.log(data.user.leetcode_username);
       if (data.user.leetcode_username) {
         const leetData = await handleleetcodeprofile(
@@ -57,28 +74,6 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
     }
   }, [registrationNumber]);
 
-  //For fetching leetcode api
-  // useEffect(() => {
-  //   // Fetch the user data on mount
-  //   const fetchUser = async () => {
-  //     try {
-  //       if (profileData.leetcode_username) {
-  //         const Leetdata = await handleleetcodeprofile(
-  //           profileData.leetcode_profile
-  //         );
-  //         setLeetcodeProfile(Leetdata);
-  //         setleetcodeusername(profileData.leetcode_username);
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching user data:", err);
-  //       setError("Failed to fetch user data.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
   const handleProfileSaved = () => {
     fetchProfileData(); // Refresh profile data
   };
