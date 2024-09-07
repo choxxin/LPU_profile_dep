@@ -1,6 +1,6 @@
 import { connectToDB } from "@/utils/database";
 import Conversation from "@/models/Conversation";
-import Message from "@/models/Message";
+import Message from "@/models/message";
 
 export async function POST(request) {
   try {

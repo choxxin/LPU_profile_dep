@@ -1,6 +1,6 @@
 import { connectToDB } from "../../../../../utils/database"; // Adjust the import path as needed
 import Conversation from "../../../../../models/Conversation"; // Adjust the import path as needed
-import Message from "../../../../../models/Message"; // Adjust the import path as needed
+import Message from "../../../../../models/message"; // Adjust the import path as needed
 
 export async function POST(request) {
   try {

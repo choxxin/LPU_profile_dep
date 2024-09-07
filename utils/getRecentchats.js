@@ -1,4 +1,4 @@
-import Message from "@/models/Message";
+import Message from "@/models/message";
 export async function getRecentChats(userId) {
   return Message.find({
     receiverId: userId,

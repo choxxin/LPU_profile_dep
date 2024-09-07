@@ -1,4 +1,4 @@
-import { getRecentChats } from "@/utils/getRecentChats"; // Import your utility function
+import { getRecentChats } from "@/utils/getRecentchats"; // Import your utility function
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
