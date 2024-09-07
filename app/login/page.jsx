@@ -68,10 +68,9 @@ function Login() {
       setloading(true);
       if (Login) {
         loginData = await loginUser(username, password, avatar); // Send avatar if isLogin is true
-        console.log("Login successful with avatar:", loginData);
       } else {
         loginData = await loginUser(username, password); // Send only username and password if isLogin is
-        console.log("Login successful without avatar:", loginData);
+        console.log("Login successful without avatar");
       }
       const cookie = loginData.cookie;
       const token = loginData.token;
@@ -89,10 +88,7 @@ function Login() {
       });
 
       setName(meow.user.name);
-      // console.log(meow.user.name);
-      // console.log("Login successful and cookie stored:", cookie);
 
-      // console.log("Login Data:", loginData); // Debugging step
       setId(meow.user._id);
       setRegistrationNumber(username);
       setPass(password);
@@ -102,17 +98,14 @@ function Login() {
       setThemedown(meow.user.themedown);
 
       toast.success("Login Successful");
-      console.log(name);
+
       router.push("/"); // Redirect to home page after successful login
     } catch (error) {
-      toast.error("Login failed");
+      toast.error("Login failed", error);
       console.log("Login Error:", error);
     } finally {
       setloading(false);
     }
-    // Handle login logic here, such as API calls
-    console.log("Username:", username);
-    console.log("Password:", password);
   };
   const handleToggle = () => {
     setLogin((prevState) => !prevState); // Toggle the state
