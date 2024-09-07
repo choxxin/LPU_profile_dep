@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+
 import useUserStore from "@/store/useUserStore";
 // File: path/to/your/usageFile.js
 

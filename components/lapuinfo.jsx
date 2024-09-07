@@ -2,17 +2,17 @@
 import { useEffect, useState } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
-import { AiFillMessage } from "react-icons/ai";
+
 import CourseList from "./courseList";
 import { getProfileByRegistrationNumber } from "@/app/api/umsinfo";
 import Leetcode from "./leetcode";
 import NOLeetcode from "./noleetcode";
 import { LuGithub } from "react-icons/lu";
 import { handleleetcodeprofile, GetCourses } from "@/app/api/umsinfo";
-import useCourses from "../../my-app/hooks/GetCourses";
+
 import toast from "react-hot-toast";
 import useUserStore from "@/store/useUserStore";
-import MessageContainer from "./chatting/Message_con";
+
 import Drawercomp from "./Drawercomp";
 import ExamList from "./Exams/Examss";
 const Lapuinfo = ({ registrationNumber, user_id }) => {

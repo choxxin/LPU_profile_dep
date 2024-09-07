@@ -10,7 +10,7 @@ import { FaInstagram } from "react-icons/fa";
 import Subjectt from "@/components/graph/Subattendence";
 import { LuGithub } from "react-icons/lu";
 import useAuthRedirect from "@/utils/useAuthredirect";
-import { FaAddressBook } from "react-icons/fa";
+
 import {
   getProfileByRegistrationNumber,
   updateUserAvatar,

@@ -1,16 +1,10 @@
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "../components/ui/drawer";
-import CommentInput from "./chatting/CommentInput";
-import Comments from "./chatting/Comments";
-import MessageContainer from "./chatting/Message_con";
+
 import { FaAddressBook } from "react-icons/fa";
 import SocialLinksForm from "./SocialLink";
 export default function LinkedinDrawer({

@@ -1,7 +1,5 @@
 "use client";
-import UserProfile from "../components/sidebar";
-import Leetcode from "@/components/leetcode";
-import Image from "next/image";
+
 import { useState, useEffect } from "react";
 import useUserStore from "@/store/useUserStore";
 import { useRouter } from "next/navigation";
@@ -10,21 +8,12 @@ import Subjectt from "@/components/graph/Subattendence";
 import ThemeSwitcher from "@/components/NightButton";
 import useAuthRedirect from "@/utils/useAuthredirect";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import {
-  loginUser,
-  getUserDetails,
-  handleleetcodeprofile,
-  getProfileByRegistrationNumber,
-  deleteUserAndProfile,
-} from "../app/api/umsinfo";
-import Cookies from "js-cookie";
-import { Input } from "@/components/ui/input";
-import toast from "react-hot-toast";
+
 import UserList from "@/components/userList";
 import Lapuinfo from "@/components/lapuinfo";
 import Announcements from "@/components/Announcements";
 import Posts from "@/components/Posts/Posts"; // Assuming you have a component for posts
-import { Router } from "next/router";
+
 import Leaderboard from "@/components/LeaderBoard/leaderboard";
 import { DialogUser } from "@/components/Responsive/Dialuser";
 import RecentChats from "@/components/chatting/Recentchat";
