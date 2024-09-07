@@ -65,7 +65,14 @@ const MyProfile = () => {
   useEffect(() => {
     const themechange = async () => {
       try {
-        const response = await changethemeup(registrationNumber, color);
+        const response = await fetch("/api/changethemeup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ reg_no: registrationNumber, color: color }),
+        });
+
         if (response) {
         } else {
           toast.error("Failed to change theme");
@@ -160,7 +167,13 @@ const MyProfile = () => {
     //alert
 
     try {
-      const response = await deleteUserAndProfile(registrationNumber);
+      const response = await fetch("/api/deleteuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reg_no: registrationNumber }),
+      });
 
       if (response) {
         toast.success("User deleted successfully");
