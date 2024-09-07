@@ -1,11 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import {
-  loginUser,
-  getUserDetails,
-  Update_course_detail,
-} from "../api/umsinfo";
+import { Update_course_detail } from "../api/umsinfo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/useUserStore";
@@ -66,19 +62,51 @@ function Login() {
     let loginData;
     try {
       setloading(true);
-      if (Login) {
-        loginData = await loginUser(username, password, avatar); // Send avatar if isLogin is true
-      } else {
-        loginData = await loginUser(username, password); // Send only username and password if isLogin is
-        console.log("Login successful without avatar");
+
+      // Make a request to the API route for login
+      const response = await fetch("/api/loginn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reg_no: username,
+          password,
+          avatar: Login ? avatar : undefined, // Only send avatar if Login is true
+        }),
+      });
+
+      // Handle response
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-      const cookie = loginData.cookie;
-      const token = loginData.token;
+
+      loginData = await response.json();
+
+      const { cookie, token } = loginData;
+
+      // Store token in local storage
       localStorage.setItem("token", token);
+
       // Store the cookie in the browser
       Cookies.set("session", cookie, { path: "/" });
-      const meow = await getUserDetails(username, password, cookie);
-      const course = await Update_course_detail(username, password, cookie);
+
+      // Fetch user details
+      const userResponse = await fetch("/api/userDetails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reg_no: username, password, cookie }),
+      });
+
+      if (!userResponse.ok) {
+        throw new Error("Network response was not okkk");
+      }
+
+      const meow = await userResponse.json();
+
+      // Optionally: Update course details
       await fetch("/api/exams/new", {
         method: "POST",
         headers: {
@@ -87,8 +115,16 @@ function Login() {
         body: JSON.stringify({ reg_no: username, password, cookie }),
       });
 
-      setName(meow.user.name);
+      await fetch("/api/updatecourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reg_no: username, password, cookie }),
+      });
 
+      // Update state with user details
+      setName(meow.user.name);
       setId(meow.user._id);
       setRegistrationNumber(username);
       setPass(password);
@@ -98,13 +134,12 @@ function Login() {
       setThemedown(meow.user.themedown);
 
       toast.success("Login Successful");
-
       router.push("/"); // Redirect to home page after successful login
     } catch (error) {
-      toast.error("Login failed", error);
+      toast.error("Login failed: " + error.message);
       console.log("Login Error:", error);
     } finally {
-      setloading(false);
+      setloading(false); // Set loading state to false
     }
   };
   const handleToggle = () => {

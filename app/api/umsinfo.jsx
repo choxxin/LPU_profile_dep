@@ -346,25 +346,3 @@ export const GetCourses = async (registrationNumber) => {
     throw error;
   }
 };
-
-const convertToPlainObject = (user) => {
-  if (!user) return null;
-
-  // Convert the user document to a plain object
-  const plainUser = user.toObject({ getters: true, versionKey: false });
-
-  // Convert the ObjectId fields to strings
-  plainUser._id = plainUser._id.toString();
-
-  if (plainUser.courses) {
-    plainUser.courses = plainUser.courses.map((course) => {
-      // Convert each course's _id to a string and remove other Mongoose fields
-      return {
-        ...course,
-        _id: course._id.toString(),
-      };
-    });
-  }
-
-  return plainUser;
-};
