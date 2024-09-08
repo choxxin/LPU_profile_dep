@@ -12,9 +12,9 @@ export async function GET(request) {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control":
-          "no-store, no-cache, must-revalidate, proxy-revalidate", // Prevent caching
-        Pragma: "no-cache", // HTTP 1.0
-        Expires: "0", // Immediately expires
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
       },
     });
 
