@@ -1,31 +1,16 @@
 import { connectToDB } from "../../../utils/database";
-import User from "../../../models/user";
+import { getalluser } from "../umsinfo"; // Function to get all users
+import { NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET(req) {
   try {
     await connectToDB();
-    const users = await User.find();
+    const users = await getalluser();
 
-    // Create response object and set headers for no caching
-    const response = new Response(JSON.stringify(users), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control":
-          "no-store, no-cache, must-revalidate, proxy-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
-
-    return response;
+    // Create response object without custom headers
+    return NextResponse.json(users, { status: 200 });
   } catch (err) {
     // Handle error case with a response
-    return new Response(JSON.stringify({ message: err.message }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }

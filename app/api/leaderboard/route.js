@@ -2,7 +2,7 @@ import Profile from "@/models/profile";
 import { connectToDB } from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET() {
   await connectToDB();
 
   try {

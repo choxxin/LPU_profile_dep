@@ -10,6 +10,14 @@ const API_BASE_URL =
   "https://ums-api-5lof.onrender.com";
 
 const SECRET_KEY = process.env.JWT_SECRET;
+//TEST
+export const getalluser = async () => {
+  try {
+    return await User.find();
+  } catch (error) {
+    return error;
+  }
+};
 export const loginUser = async (reg_no, password, avatar) => {
   try {
     await connectToDB(); // Connect to the database
