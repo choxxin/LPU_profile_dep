@@ -2,7 +2,7 @@ import { connectToDB } from "../../../utils/database";
 import { getalluser } from "../umsinfo"; // Function to get all users
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function POST(req) {
   try {
     await connectToDB();
     const users = await getalluser();

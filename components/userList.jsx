@@ -17,7 +17,7 @@ const UserList = ({ onSelectUser, selectedUser }) => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("/api/getalluser", {
+        const response = await axios.post("/api/getalluser", {
           headers: {
             "Cache-Control": "no-cache", // Prevents caching of the response
           },

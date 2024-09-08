@@ -101,7 +101,7 @@ function Login() {
       });
 
       if (!userResponse.ok) {
-        throw new Error("Network response was not okkk");
+        throw new Error("Network response was not ok2");
       }
 
       const meow = await userResponse.json();
