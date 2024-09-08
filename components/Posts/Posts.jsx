@@ -13,7 +13,7 @@ const Posts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("/api/posts"); // Adjust the URL to your API endpoint
+        const response = await axios.post("/api/posts"); // Adjust the URL to your API endpoint
         setPosts(response.data);
         setLoading(false);
       } catch (err) {

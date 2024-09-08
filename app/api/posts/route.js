@@ -1,7 +1,7 @@
 import { connectToDB } from "@/utils/database";
 import Prompt from "@/models/prompt";
 
-export const GET = async () => {
+export async function POST() {
   try {
     await connectToDB();
     const prompts = await Prompt.find().populate("creator");
@@ -16,4 +16,4 @@ export const GET = async () => {
       { status: 500 }
     );
   }
-};
+}

@@ -8,7 +8,8 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch("/api/leaderboard");
+        const response = await fetch("/api/leaderboard", { method: "POST" });
+
         const data = await response.json();
 
         if (data.success) {

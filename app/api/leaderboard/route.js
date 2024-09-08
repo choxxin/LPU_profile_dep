@@ -2,10 +2,9 @@ import Profile from "@/models/profile";
 import { connectToDB } from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  await connectToDB();
-
+export async function POST() {
   try {
+    await connectToDB();
     const topProfiles = await Profile.find({})
       .populate("user", "name registrationNumber profile_image")
       .sort({ cgpa: -1 })
