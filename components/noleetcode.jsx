@@ -21,7 +21,19 @@ const NOLeetcode = ({ reg_no, onProfileSaved, name }) => {
         setLoading(true);
         setError(null);
 
-        const updatedUser = await updateLeetcodeUsername(reg_no, username);
+        const response = await fetch("/api/updateleetcodeusername", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reg_no: registrationNumber,
+            username: username,
+          }),
+        });
+
+        // Parse the JSON response
+        const updatedUser = await response.json();
         console.log(updatedUser);
 
         if (onProfileSaved) {

@@ -59,7 +59,7 @@ const UserList = ({ onSelectUser, selectedUser }) => {
       </div>
 
       {Loading ? (
-        <div className="flex w-72 min-h-52 flex-col gap-4 ml-10">
+        <div className="flex w-72 min-h-52 flex-col gap-4  ">
           <div className="flex items-center gap-4">
             <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
             <div className="flex flex-col gap-4">
@@ -70,7 +70,7 @@ const UserList = ({ onSelectUser, selectedUser }) => {
           <div className="skeleton h-32 w-full"></div>
         </div>
       ) : (
-        <div className="ml-6 gap-4 sm:grid-cols-2 lg:grid-cols-3 flex flex-col bg-gray-300 w-80 min-w-52 min-h-16 overflow-scroll overflow-x-hidden dark:bg-slate-600 max-h-screen">
+        <div className="  gap-4 sm:grid-cols-2 lg:grid-cols-3 flex flex-col  w-80  min-h-16 overflow-scroll overflow-x-hidden dark:bg-slate-600 max-h-[600px]  ">
           {filteredUsers.map((user) => (
             <div
               key={user._id}

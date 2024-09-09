@@ -241,7 +241,7 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="flex flex-col lg:flex-row flex-grow">
-        <div className=" hidden w-full bg-gray-300 dark:bg-slate-900 lg:w-1/4 lg:block  ">
+        <div className="hidden w-full bg-gray-300 dark:bg-slate-900 lg:w-1/4 lg:flex lg:flex-col lg:items-center lg:justify-center   ">
           <UserList
             onSelectUser={setSelectedUser}
             selectedUser={selectedUser}
