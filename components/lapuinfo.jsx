@@ -145,7 +145,7 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
                 <div className="text-red-500 text-lg mt-2"></div>
               )}
             </div>
-            <div className="text-xl mt-7 text-semibold text-gray-600 dark:text-gray-300">
+            <div className="text-xl mt-7 text-semibold text-black font-semibold">
               <p>Reg No:{profileData.user.registrationNumber}</p>
             </div>
             <div className="flex justify-center  h-14">

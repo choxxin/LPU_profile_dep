@@ -7,7 +7,7 @@ export function DialogUser({ setSelectedUser, selectedUser }) {
       <DialogTrigger asChild>
         <button>Select User</button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] ">
+      <DialogContent className="sm:max-w-[425px] max-h-screen ">
         <UserList onSelectUser={setSelectedUser} selectedUser={selectedUser} />
       </DialogContent>
     </Dialog>

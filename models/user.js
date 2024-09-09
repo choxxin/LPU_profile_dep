@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   },
   profile_image: {
     type: String,
+    default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
   },
   leetcode_username: {
     type: String,

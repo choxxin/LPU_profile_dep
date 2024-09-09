@@ -47,7 +47,7 @@ const UserList = ({ onSelectUser, selectedUser }) => {
   return (
     <>
       {/* Search bar */}
-      <div className="ml-6 mb-4 mr-9 flex gap-4">
+      <div className="ml-6 mb-4 mr-9 flex gap-4  ">
         <input
           type="text"
           value={searchTerm}
@@ -70,7 +70,7 @@ const UserList = ({ onSelectUser, selectedUser }) => {
           <div className="skeleton h-32 w-full"></div>
         </div>
       ) : (
-        <div className="ml-6 gap-4 sm:grid-cols-2 lg:grid-cols-3 flex flex-col bg-gray-300 w-80 min-w-52 min-h-16 overflow-scroll overflow-x-hidden dark:bg-slate-600">
+        <div className="ml-6 gap-4 sm:grid-cols-2 lg:grid-cols-3 flex flex-col bg-gray-300 w-80 min-w-52 min-h-16 overflow-scroll overflow-x-hidden dark:bg-slate-600 max-h-screen">
           {filteredUsers.map((user) => (
             <div
               key={user._id}
