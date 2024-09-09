@@ -34,7 +34,7 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard">
-      <h2 className="text-2xl font-bold mb-4">Top 10 CGPA Holders</h2>
+      <h2 className="text-2xl font-bold mb-4">Top 20 CGPA Holders</h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left">
           <thead>
@@ -65,7 +65,9 @@ const Leaderboard = () => {
                     {student.name}
                   </td>
                   <td className="px-4 py-2">{student.registrationNumber}</td>
-                  <td className="px-4 py-2">{student.cgpa}</td>
+                  <td className="px-4 py-2">
+                    {student.hide ? "Hidden" : student.cgpa}
+                  </td>
                 </tr>
               ))
             )}

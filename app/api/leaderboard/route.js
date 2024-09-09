@@ -6,9 +6,9 @@ export async function POST() {
   try {
     await connectToDB();
     const topProfiles = await Profile.find({})
-      .populate("user", "name registrationNumber profile_image")
+      .populate("user", "name registrationNumber profile_image hide")
       .sort({ cgpa: -1 })
-      .limit(10)
+      .limit(20)
       .exec();
 
     const leaderboard = topProfiles.map((profile) => ({
@@ -16,6 +16,7 @@ export async function POST() {
       registrationNumber: profile.user.registrationNumber,
       profileImage: profile.user.profile_image,
       cgpa: profile.cgpa,
+      hide: profile.user.hide,
     }));
 
     return NextResponse.json({ success: true, data: leaderboard });
