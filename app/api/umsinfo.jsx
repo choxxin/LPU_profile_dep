@@ -70,49 +70,115 @@ export const loginUser = async (reg_no, password, avatar) => {
   }
 };
 
+// export const getUserDetails = async (reg_no, password, cookie) => {
+//   try {
+//     // Find the user by registration number and password
+//     const user = await User.findOne({ registrationNumber: reg_no });
+
+//     if (!user) {
+//       throw new Error("User not found. Please log in first.");
+//     }
+//     if (!user.name || !user.profile_image) {
+//       // Fetch the user's name from the external API
+//       const response = await axios.post(`${API_BASE_URL}/me`, {
+//         reg_no,
+//         password,
+//         cookie,
+//       });
+
+//       const userData = response.data;
+
+//       // Update the user's name in the MongoDB
+//       user.name = userData.name; // Assuming the API returns the name
+
+//       await user.save(); // Save the updated user document
+//     }
+
+//     // Check if the profile exists in the database
+//     let userProfile = await Profile.findOne({ user: user._id })
+//       .populate("user")
+//       .lean();
+//     //lean helps to convert raw data in js obj
+
+//     if (!userProfile) {
+//       // If the profile doesn't exist, fetch the data from the API
+//       const response = await axios.post(`${API_BASE_URL}/me`, {
+//         reg_no,
+//         password,
+//         cookie,
+//       });
+
+//       const userData = response.data;
+
+//       // Create a new profile in the database
+//       userProfile = new Profile({
+//         user: user._id, // Reference the existing user
+//         program: userData.program,
+//         section: userData.section,
+//         cgpa: userData.cgpa,
+//         roll_number: userData.roll_number,
+//         agg_attendance: userData.agg_attendance,
+//       });
+
+//       await userProfile.save(); // Save the profile to the database
+//     }
+
+//     return userProfile; // Return the profile data
+//   } catch (error) {
+//     console.error("Get User Details Error:", error);
+//     throw error;
+//   }
+// };
 export const getUserDetails = async (reg_no, password, cookie) => {
   try {
-    // Find the user by registration number and password
-    const user = await User.findOne({ registrationNumber: reg_no });
+    // Ensure database connection
+    await connectToDB();
+
+    // Find the user by registration number (user should already exist after login)
+    let user = await User.findOne({ registrationNumber: reg_no });
 
     if (!user) {
       throw new Error("User not found. Please log in first.");
     }
+
+    // Declare a variable to store API response
+    let userData = null;
+
+    // Fetch API only if necessary (when user data is incomplete)
     if (!user.name || !user.profile_image) {
-      // Fetch the user's name from the external API
       const response = await axios.post(`${API_BASE_URL}/me`, {
         reg_no,
         password,
         cookie,
       });
+      userData = response.data;
 
-      const userData = response.data;
+      // Update missing user fields and save
+      user.name = userData.name;
 
-      // Update the user's name in the MongoDB
-      user.name = userData.name; // Assuming the API returns the name
-
-      await user.save(); // Save the updated user document
+      await user.save();
     }
 
-    // Check if the profile exists in the database
+    // Find the user's profile
     let userProfile = await Profile.findOne({ user: user._id })
       .populate("user")
       .lean();
-    //lean helps to convert raw data in js obj
 
+    // If profile doesn't exist, use the API response or fetch the data if not already fetched
     if (!userProfile) {
-      // If the profile doesn't exist, fetch the data from the API
-      const response = await axios.post(`${API_BASE_URL}/me`, {
-        reg_no,
-        password,
-        cookie,
-      });
+      if (!userData) {
+        // Fetch userData if not fetched earlier
+        const response = await axios.post(`${API_BASE_URL}/me`, {
+          reg_no,
+          password,
+          cookie,
+        });
+        userData = response.data;
+      }
 
-      const userData = response.data;
-
-      // Create a new profile in the database
+      // Create a new profile with the fetched data
       userProfile = new Profile({
-        user: user._id, // Reference the existing user
+        user: user._id, // Reference the user
         program: userData.program,
         section: userData.section,
         cgpa: userData.cgpa,
@@ -120,10 +186,13 @@ export const getUserDetails = async (reg_no, password, cookie) => {
         agg_attendance: userData.agg_attendance,
       });
 
-      await userProfile.save(); // Save the profile to the database
+      await userProfile.save(); // Save the profile
+      userProfile = await Profile.findById(userProfile._id)
+        .populate("user")
+        .lean(); // Populate user data
     }
 
-    return userProfile; // Return the profile data
+    return userProfile; // Return profile data
   } catch (error) {
     console.error("Get User Details Error:", error);
     throw error;
