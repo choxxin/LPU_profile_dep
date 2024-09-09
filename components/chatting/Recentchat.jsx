@@ -25,11 +25,11 @@ const RecentChats = ({ userId }) => {
         {recentChats.map((chat, index) => (
           <div key={index} className="chat-item flex  space-x-4  ">
             <img
-              src={chat.senderId.profile_image}
-              alt={`${chat.senderId.name}'s avatar`}
+              src={chat.senderId?.profile_image}
+              alt={`${chat.senderId?.name}'s avatar`}
               className="w-20 h-20 rounded-full"
             />
-            <span className="text-lg font-semibold">{chat.senderId.name}</span>
+            <span className="text-lg font-semibold">{chat.senderId?.name}</span>
             {/* Red dot indicator for unread messages */}
             {!chat.isSeen && (
               <span className="ml-auto w-3 h-3 rounded-full bg-red-500"></span>
