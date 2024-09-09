@@ -13,7 +13,14 @@ const Leetcode = ({ leetcode, switchprofile, username, reg_no, themedow }) => {
   useEffect(() => {
     const themechange = async () => {
       try {
-        const response = await changethemedown(registrationNumber, color);
+        // const response = await changethemedown(registrationNumber, color);
+        const response = await fetch("/api/changethemedown", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ reg_no: registrationNumber, color: color }),
+        });
         if (response) {
           // Success: Display a success message
         } else {
@@ -147,9 +154,9 @@ const Leetcode = ({ leetcode, switchprofile, username, reg_no, themedow }) => {
               }}
             ></div>
             <div
-              className="border-2 border-white h-10 w-10 g1"
+              className="border-2 border-white h-10 w-10 g12"
               onClick={() => {
-                SetColor("g1");
+                SetColor("g12");
               }}
             ></div>
             <div
@@ -165,9 +172,9 @@ const Leetcode = ({ leetcode, switchprofile, username, reg_no, themedow }) => {
               }}
             ></div>
             <div
-              className="border-2 border-white h-10 w-10 g3 "
+              className="border-2 border-white h-10 w-10 g32 "
               onClick={() => {
-                SetColor("g3");
+                SetColor("g32");
               }}
             ></div>
           </div>

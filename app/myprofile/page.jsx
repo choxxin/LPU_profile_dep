@@ -327,9 +327,9 @@ const MyProfile = () => {
                 }}
               ></div>
               <div
-                className="border-2 border-white h-10 w-10 g2"
+                className="border-2 border-white h-10 w-10 g22"
                 onClick={() => {
-                  SetColor("g2");
+                  SetColor("g22");
                 }}
               ></div>
               <div

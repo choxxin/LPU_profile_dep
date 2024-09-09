@@ -71,7 +71,7 @@
 }
 
 .gsec {
-  background-image: linear-gradient(-225deg, #20e2d7 0%, #f9fea5 100%);
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -86,7 +86,9 @@
     #321575 100%
   );
 }
-
+.g12 {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+}
 /* option */
 .g1 {
   background-image: linear-gradient(
@@ -97,6 +99,9 @@
   );
   background-blend-mode: multiply, multiply;
 }
+.g22 {
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+}
 .g2 {
   background-image: linear-gradient(
     -225deg,
@@ -104,6 +109,14 @@
     #44107a 29%,
     #ff1361 67%,
     #fff800 100%
+  );
+}
+.g32 {
+  background-image: linear-gradient(
+    -225deg,
+    #7742b2 0%,
+    #f180ff 52%,
+    #fd8bd9 100%
   );
 }
 .g3 {
