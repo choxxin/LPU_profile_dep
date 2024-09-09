@@ -202,7 +202,7 @@ export const getUserDetails = async (reg_no, password, cookie) => {
 export const handleleetcodeprofile = async (leetusername) => {
   try {
     const response = await axios.get(
-      `https://alfa-leetcode-api.onrender.com/${leetusername}/solved`
+      `https://alfa-leetcode-api-1.onrender.com/${leetusername}/solved`
     );
 
     // Check if the user exists in the response
