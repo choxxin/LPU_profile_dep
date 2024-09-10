@@ -72,7 +72,7 @@ function Login() {
         body: JSON.stringify({
           reg_no: username,
           password,
-          avatar: Login ? avatar : undefined, // Only send avatar if Login is true
+          avatar: !Login ? avatar : undefined, // Only send avatar if Login is true
         }),
       });
 
