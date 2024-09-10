@@ -196,7 +196,7 @@ function Login() {
             htmlFor="username"
             className="block text-sm font-medium text-gray-700"
           >
-            Registeration number
+            Registration number
           </label>
           <input
             type="text"

@@ -13,11 +13,13 @@ const SECRET_KEY = process.env.JWT_SECRET;
 //TEST
 export const getalluser = async () => {
   try {
-    return await User.find();
+    // Find all users and exclude the 'password' field
+    return await User.find().select("-password -cookie");
   } catch (error) {
     return error;
   }
 };
+
 export const loginUser = async (reg_no, password, avatar) => {
   try {
     await connectToDB(); // Connect to the database
@@ -235,10 +237,12 @@ export const getProfileByRegistrationNumber = async (registrationNumber) => {
       throw new Error("User not found");
     }
 
-    // Find the profile associated with the user
-    const userProfile = await Profile.findOne({ user: user._id }).populate(
-      "user"
-    );
+    // Find the profile associated with the user and exclude the password
+    const userProfile = await Profile.findOne({ user: user._id }).populate({
+      path: "user",
+      select: "-password -cookie", // Exclude the password field when populating user data
+    });
+
     console.log(userProfile);
     if (!userProfile) {
       throw new Error("Profile not found for the given registration number");
@@ -250,6 +254,7 @@ export const getProfileByRegistrationNumber = async (registrationNumber) => {
     throw error;
   }
 };
+
 export const updateLeetcodeUsername = async (
   registrationNumber,
   newLeetcodeUsername
