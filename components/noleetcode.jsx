@@ -98,7 +98,7 @@ const NOLeetcode = ({ reg_no, onProfileSaved, name }) => {
                 Register Yourself
               </h1>
               <p className="text-gray-300 text-xl font-bold">
-                Leetcode Profile
+                Enter Leetcode username
               </p>
               <input
                 type="text"

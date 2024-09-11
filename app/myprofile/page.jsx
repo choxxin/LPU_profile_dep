@@ -128,16 +128,29 @@ const MyProfile = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch profile");
       }
+
       const data = await response.json();
       setProfileData(data);
       SetColor(data.user.themetop);
       sethide(data.user.hide);
-      console.log(data.user.leetcode_username);
+
+      // Fetch LeetCode profile data if LeetCode username is available
       if (data.user.leetcode_username) {
-        const leetData = await handleleetcodeprofile(
-          data.user.leetcode_username
-        );
-        setLeetcodeProfile(leetData);
+        const leetResponse = await fetch("/api/handleleetcodeprofile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ leetusername: data.user.leetcode_username }),
+        });
+
+        if (leetResponse.ok) {
+          const leetData = await leetResponse.json();
+          setLeetcodeProfile(leetData.data); // Set the fetched LeetCode data
+        } else {
+          console.error("Failed to fetch LeetCode profile");
+          setLeetcodeProfile(null);
+        }
       } else {
         setLeetcodeProfile(null);
       }
