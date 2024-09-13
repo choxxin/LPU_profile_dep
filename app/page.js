@@ -17,6 +17,7 @@ import Posts from "@/components/Posts/Posts"; // Assuming you have a component f
 import Leaderboard from "@/components/LeaderBoard/leaderboard";
 import { DialogUser } from "@/components/Responsive/Dialuser";
 import RecentChats from "@/components/chatting/Recentchat";
+import Gradecourse from "@/components/gradepredict/gradepredict";
 
 export default function Home() {
   useAuthRedirect();
@@ -107,6 +108,14 @@ export default function Home() {
                       Status
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className={activeContent === "grade" ? "bg-sky-400" : ""}
+                      onClick={() => setActiveContent("grade")}
+                    >
+                      GradePredictor
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -181,6 +190,14 @@ export default function Home() {
                 onClick={() => setActiveContent("leader")}
               >
                 LeaderBoard
+              </a>
+            </li>
+            <li>
+              <a
+                className={activeContent === "grade" ? "bg-sky-400" : ""}
+                onClick={() => setActiveContent("grade")}
+              >
+                GradePredictor
               </a>
             </li>
             <li>
@@ -262,6 +279,10 @@ export default function Home() {
           ) : activeContent === "leader" ? (
             <div className="text-center text-gray-600 dark:text-gray-200">
               <Leaderboard />
+            </div>
+          ) : activeContent === "grade" ? (
+            <div className="text-center text-gray-600 dark:text-gray-200">
+              <Gradecourse />
             </div>
           ) : (
             <div className="text-center text-gray-600 dark:text-gray-200">
