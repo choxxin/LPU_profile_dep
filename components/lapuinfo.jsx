@@ -92,9 +92,12 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
     <>
       {profileData ? (
         <div
-          className={`min-h-32 w-full        ${
-            profileData.user.themetop || "gradient-profile"
-          }`}
+          className={`min-h-32 w-full bg-gray-300   
+              
+            // profileData.user.themetop || "gradient-profile"
+
+         
+          `}
         >
           <div className="  gap-5 flex flex-col lg:flex-row ">
             <div className="avatar mt-5 ml-5">
@@ -155,7 +158,7 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
           <div className="flex flex-col gap-5 mt-6 lg:flex-row">
             {hide ? (
               <div
-                className="radial-progress text-pink-400 text-2xl ml-5 cgpa"
+                className="radial-progress text-blue-400 text-2xl ml-5 "
                 style={{
                   "--value": 100,
                   "--size": "12rem",
@@ -166,7 +169,7 @@ const Lapuinfo = ({ registrationNumber, user_id }) => {
               </div>
             ) : (
               <div
-                className="radial-progress text-pink-400 text-2xl ml-5 cgpa"
+                className="radial-progress text-blue-600 text-2xl ml-5 "
                 style={{
                   "--value": (profileData.cgpa / 10) * 100,
                   "--size": "12rem",

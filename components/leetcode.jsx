@@ -41,9 +41,9 @@ const Leetcode = ({ leetcode, switchprofile, username, reg_no, themedow }) => {
   }, [color]);
   return (
     <div
-      className={`flex flex-col min-w-64 md:flex-row gap-10   mt-5 py-11  ${
-        themedow || color
-      } `}
+      className={`flex flex-col min-w-64 md:flex-row gap-10   mt-5 py-11   
+        bg-sky-700
+      `}
     >
       <div className="flex flex-col gap-1 py-10 ml-5">
         <p className="text-center text-3xl gradient-blue   font-bold">
